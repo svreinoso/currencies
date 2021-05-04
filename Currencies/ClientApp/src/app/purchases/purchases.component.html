@@ -1,0 +1,60 @@
+<div>
+    <app-currencies></app-currencies>
+</div>
+<div class="row">
+    <div class="col-12">
+        <form (ngSubmit)="createPurchase()" [formGroup]="purchaseForm" class="form-horizontal center" id="purchaseForm">
+            <div class="form-group">
+                <label for="userId" class="control-label">User Id</label>
+                <input type="text" class="form-control" id="inputEmail" name="userId" formControlName="userId">
+                <small *ngIf="userId!.invalid && (userId!.dirty || userId!.touched)" class="text-danger">This field is required</small>
+            </div>
+            <div class="form-group">
+                <label for="quantity" class="control-label">Quantity to buy in pesos</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" formControlName="quantity">
+                <small *ngIf="quantity!.invalid && (quantity!.dirty || quantity!.touched)" class="text-danger">This field is required and grater than 0</small>
+            </div>
+            <div class="form-group">
+                <label for="quantity" class="control-label">Currency</label>
+                <select class="form-control" formControlName="currencyId">
+                    <option value="">Select</option>
+                    <option *ngFor="let currency of currencies" value="{{currency.id}}">{{currency.name}}</option>
+                </select>
+                <small *ngIf="currencyId!.invalid && (currencyId!.dirty || currencyId!.touched)" class="text-danger">This field is required</small>
+            </div>
+            <div class="form-group">
+                <div class="text-right">
+                    <button class="btn btn-primary" type="submit" [disabled]="isLoading">Buy</button>
+                </div>
+            </div>
+            <div *ngIf="isLoading">
+                <app-loading-indicator></app-loading-indicator>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row mt-2" *ngIf="purchases.length > 0">
+    <div class="col-12">
+        <h3>My purchases</h3>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Currency</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let purchase of purchases">
+                <th class="text-uppercase">{{purchase.currencyName}}</th>
+                <td>{{purchase.price | number : '0.0-2'}}</td>
+                <td>{{purchase.quantity}}</td>
+                <td>{{purchase.amount | number : '0.0-2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

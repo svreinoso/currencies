@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-12 mb-2">
+        <button class="btn btn-primary" (click)="refresh()">Refresh</button>
+    </div>
+    <div class="col-12">
+        <h3 class="text-center">Currencies</h3>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sell</th>
+                <th scope="col">Last Update Date</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let currency of currencies">
+                <th class="text-uppercase">{{currency.name}}</th>
+                <td>{{currency.buy}}</td>
+                <td>{{currency.sell}}</td>
+                <td>{{currency.lastUpdateDate}}</td>
+                <td>
+                    <Button class="btn btn-success btn-sm" (click)="buy(currency.name)">Buy</Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    margin: auto;
+    background: aliceblue;
+    opacity: 0.4;
+}
+.loading-indicator img {
+    margin: auto;
+}
